@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un día mágico para Maybri 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(145deg,#ffe0ed,#f2ddff,#dff5ff);
+    color: #805b82;
+}
+
+.fondo {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.burbuja {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,.38);
+    animation: flotar 8s infinite ease-in-out;
+}
+
+.burbuja:nth-child(1) {
+    width: 130px;
+    height: 130px;
+    top: 8%;
+    left: -30px;
+}
+
+.burbuja:nth-child(2) {
+    width: 90px;
+    height: 90px;
+    right: 5%;
+    top: 25%;
+    animation-delay: 2s;
+}
+
+.burbuja:nth-child(3) {
+    width: 170px;
+    height: 170px;
+    bottom: 0;
+    right: -50px;
+    animation-delay: 1s;
+}
+
+@keyframes flotar {
+    50% { transform: translateY(-25px); }
+}
+
+.contenedor {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 14px;
+    position: relative;
+    z-index: 2;
+}
+
+.tarjeta {
+    background: rgba(255,255,255,.88);
+    width: 100%;
+    max-width: 460px;
+    border-radius: 35px;
+    padding: 32px 22px;
+    text-align: center;
+    box-shadow: 0 15px 45px rgba(170,100,160,.20);
+    border: 3px solid white;
+    position: relative;
+    overflow: hidden;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: #ffe0ed;
+    color: #e477a7;
+    padding: 8px 17px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-family: 'Fredoka', sans-serif;
+    color: #ed78a9;
+    font-size: clamp(30px, 8vw, 40px);
+    margin-top: 17px;
+    line-height: 1.2;
+}
+
+.nombre {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 34px;
+    color: #a77bce;
+    margin-top: 8px;
+}
+
+.descripcion {
+    font-size: 14px;
+    margin-top: 12px;
+    line-height: 1.7;
+}
+
+.regalo {
+    width: 190px;
+    height: 190px;
+    margin: 28px auto;
+    position: relative;
+    cursor: pointer;
+    animation: saltito 2s infinite;
+}
+
+@keyframes saltito {
+    0%,100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.caja {
+    position: absolute;
+    width: 150px;
+    height: 105px;
+    background: #f58ab7;
+    bottom: 12px;
+    left: 20px;
+    border-radius: 12px;
+    border: 4px solid white;
+    box-shadow: 0 9px 0 #d86c9b;
+}
+
+.caja::before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 100%;
+    background: #ffe6a7;
+    left: 58px;
+}
+
+.tapa {
+    position: absolute;
+    width: 172px;
+    height: 35px;
+    background: #ed6ca5;
+    left: 9px;
+    bottom: 112px;
+    border: 4px solid white;
+    border-radius: 10px;
+    transform-origin: left bottom;
+    transition: 1s;
+    z-index: 3;
+}
+
+.tapa::before {
+    content: "";
+    position: absolute;
+    width: 23px;
+    height: 100%;
+    background: #ffe6a7;
+    left: 67px;
+}
+
+.lazo {
+    position: absolute;
+    bottom: 143px;
+    left: 70px;
+    font-size: 48px;
+    z-index: 4;
+    transition: 1s;
+}
+
+.regalo.abierto .tapa {
+    transform: translate(-45px,-65px) rotate(-35deg);
+}
+
+.regalo.abierto .lazo {
+    transform: translateY(-75px) rotate(25deg);
+}
+
+.texto-tocar {
+    color: #e477a7;
+    font-weight: 700;
+    font-size: 14px;
+    animation: parpadeo 1.5s infinite;
+}
+
+@keyframes parpadeo {
+    50% { opacity: .5; }
+}
+
+.oculto {
+    display: none;
+}
+
+.sorpresa {
+    animation: aparecer .9s ease;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(30px) scale(.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.personajes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 43px;
+    margin: 20px 0;
+}
+
+.personajes span {
+    animation: bailar 1.5s infinite ease-in-out;
+}
+
+.personajes span:nth-child(2) {
+    animation-delay: .3s;
+}
+
+.personajes span:nth-child(3) {
+    animation-delay: .6s;
+}
+
+@keyframes bailar {
+    50% { transform: translateY(-12px) rotate(8deg); }
+}
+
+.torta {
+    font-size: 85px;
+    margin: 12px 0;
+    animation: crecer 1s ease;
+}
+
+@keyframes crecer {
+    from { transform: scale(.3); }
+    to { transform: scale(1); }
+}
+
+.mensaje {
+    background: #fff0f7;
+    border: 2px dashed #efa5c6;
+    border-radius: 22px;
+    padding: 20px 16px;
+    margin-top: 18px;
+    line-height: 1.9;
+    font-size: 14px;
+}
+
+.mensaje h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 25px;
+    color: #e477a7;
+    margin-bottom: 12px;
+}
+
+.boton {
+    border: none;
+    background: linear-gradient(135deg,#f28ab8,#b995e8);
+    color: white;
+    padding: 14px 23px;
+    border-radius: 30px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 10px 4px;
+    box-shadow: 0 5px 12px #e8c1df;
+    transition: .3s;
+}
+
+.boton:hover {
+    transform: scale(1.07);
+}
+
+.pie {
+    font-size: 12px;
+    margin-top: 22px;
+    color: #bc8cb1;
+}
+
+.confeti {
+    position: fixed;
+    top: -30px;
+    z-index: 10;
+    pointer-events: none;
+    animation: lluvia linear forwards;
+}
+
+@keyframes lluvia {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: .2;
+    }
+}
+
+.foto-decoracion {
+    font-size: 22px;
+    margin: 10px;
+}
+
+@media(max-width:380px) {
+    .tarjeta { padding: 25px 15px; }
+    .nombre { font-size: 29px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fondo">
+    <div class="burbuja"></div>
+    <div class="burbuja"></div>
+    <div class="burbuja"></div>
+</div>
+
+<main class="contenedor">
+
+<section class="tarjeta">
+
+    <div class="etiqueta">
+        ✨ UN DÍA MUY ESPECIAL ✨
+    </div>
+
+    <h1>¡Sorpresa!</h1>
+
+    <div class="nombre">
+        Maybri Dayana 💗
+    </div>
+
+    <p class="descripcion">
+        Alguien muy especial merece una celebración
+        llena de magia, sonrisas y mucho amor.
+    </p>
+
+    <div class="regalo" id="regalo" onclick="abrirRegalo()">
+
+        <div class="tapa"></div>
+        <div class="lazo">🎀</div>
+        <div class="caja"></div>
+
+    </div>
+
+    <p class="texto-tocar" id="instruccion">
+        👆 ¡Toca el regalito para descubrir tu sorpresa!
+    </p>
+
+    <div id="sorpresa" class="oculto">
+
+        <div class="personajes">
+            <span>🐻</span>
+            <span>🐰</span>
+            <span>🐱</span>
+        </div>
+
+        <h1>¡FELIZ CUMPLEAÑOS!</h1>
+
+        <div class="torta">🎂</div>
+
+        <p class="descripcion">
+            ¡Que comience la fiesta!
+            Hoy todo es alegría porque celebramos tu vida. 🥳
+        </p>
+
+        <div class="mensaje">
+
+            <h2>💌 Una cartita para ti</h2>
+
+            <p>
+                Querida Maybri Dayana:
+            </p>
+
+            <p>
+                Deseo que este nuevo año de vida
+                esté lleno de aventuras bonitas,
+                sueños cumplidos y momentos
+                que te hagan sonreír muchísimo.
+            </p>
+
+            <p>
+                Que Dios cuide cada uno de tus pasos,
+                te regale salud, amor y muchas bendiciones.
+                Que nunca pierdas esa magia que hace
+                especial tu existencia.
+            </p>
+
+            <p>
+                ¡Mereces cosas maravillosas!
+            </p>
+
+            <h2>💕 ¡Disfruta tu día! 💕</h2>
+
+        </div>
+
+        <div class="foto-decoracion">
+            🎁 🍭 🍓 🧁 🌈
+        </div>
+
+        <button class="boton" onclick="celebrar()">
+            🎉 ¡Más celebración!
+        </button>
+
+        <button class="boton" onclick="corazones()">
+            💗 Enviar amor
+        </button>
+
+    </div>
+
+    <div class="pie">
+        Hecho con mucho cariño para ti ♡
+    </div>
+
+</section>
+
+</main>
+
+<script>
+
+let abierto = false;
+
+function abrirRegalo() {
+
+    if (abierto) return;
+
+    abierto = true;
+
+    document.getElementById("regalo").classList.add("abierto");
+
+    document.getElementById("instruccion").style.display = "none";
+
+    setTimeout(() => {
+
+        document.getElementById("sorpresa").classList.remove("oculto");
+
+        lanzarConfeti(65);
+
+        document.getElementById("sorpresa").scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+
+    }, 850);
+
+}
+
+function lanzarConfeti(cantidad, emoji) {
+
+    const elementos = emoji || ["🎉","💗","✨","🌸","🎊","⭐","🍬"];
+
+    for (let i = 0; i < cantidad; i++) {
+
+        const pieza = document.createElement("div");
+
+        pieza.className = "confeti";
+
+        pieza.textContent = elementos[
+            Math.floor(Math.random() * elementos.length)
+        ];
+
+        pieza.style.left = Math.random() * 100 + "vw";
+
+        pieza.style.fontSize = (15 + Math.random() * 22) + "px";
+
+        pieza.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
+
+        document.body.appendChild(pieza);
+
+        setTimeout(() => pieza.remove(), 7500);
+
+    }
+
+}
+
+function celebrar() {
+    lanzarConfeti(90);
+}
+
+function corazones() {
+    lanzarConfeti(45, ["💗","💕","💖","💝","❤️"]);
+}
+
+</script>
+
+</body>
+</html>
